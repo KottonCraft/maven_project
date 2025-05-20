@@ -28,7 +28,7 @@ public class AController {
         return "http call -> AController() -> " + a.callA();
     }
 
-    @RequestMapping("/hello")
+    @RequestMapping("/helloWorld")
     public String hello(@RequestParam(value = "myname", required = false) String name, String p){
         return "hello " + name + p;
     }
