@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>登录</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0-alpha1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5" style="max-width: 400px;">
+    <div class="card shadow">
+        <div class="card-body">
+            <h3 class="card-title text-center mb-4">电子名片系统登录</h3>
+
+            <div th:if="${error}" class="alert alert-danger" role="alert">
+                [[${error}]]
+            </div>
+            <div th:if="${message}" class="alert alert-success" role="alert">
+                [[${message}]]
+            </div>
+
+            <form th:action="@{/login}" method="post">
+                <div class="mb-3">
+                    <label class="form-label">用户名</label>
+                    <input type="text" class="form-control" name="username" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">密码</label>
+                    <input type="password" class="form-control" name="password" required>
+                </div>
+
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" name="remember-me">
+                    <label class="form-check-label">保持登录</label>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">登录</button>
+            </form>
+
+            <div class="mt-3 text-center">
+                <a href="/register" class="text-decoration-none">注册新账号</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

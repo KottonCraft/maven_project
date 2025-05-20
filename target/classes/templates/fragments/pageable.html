@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="pagination(totalPages, currentPage, keyword)"
+<!-- 分页导航 -->
+<nav th:if="${totalPages > 1}">
+    <ul class="pagination justify-content-center">
+        <li class="page-item" th:classappend="${currentPage == 1} ? 'disabled'">
+            <a class="page-link"
+               th:href="@{/cards(keyword=${keyword}, page=${currentPage - 1})}">
+                上一页
+            </a>
+        </li>
+
+        <li th:each="page : ${#numbers.sequence(1, totalPages)}"
+            class="page-item"
+            th:classappend="${page == currentPage} ? 'active'">
+            <a class="page-link"
+               th:href="@{/cards(keyword=${keyword}, page=${page})}"
+               th:text="${page}"></a>
+        </li>
+
+        <li class="page-item" th:classappend="${currentPage == totalPages} ? 'disabled'">
+            <a class="page-link"
+               th:href="@{/cards(keyword=${keyword}, page=${currentPage + 1})}">
+                下一页
+            </a>
+        </li>
+    </ul>
+</nav>

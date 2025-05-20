@@ -1,0 +1,74 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="list(cards)">
+  <div style="margin-top: 70px;">
+    <table  class="table table-striped table-hover">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">显示名称</th>
+        <th scope="col">名片标题</th>
+        <th scope="col">职位</th>
+        <th scope="col">公司名称</th>
+        <th scope="col">联系方式</th>
+        <th scope="col">状态</th>
+        <th scope="col">操作</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:if="${#lists.isEmpty(cards)}">
+        <td colspan="8" class="text-center text-muted py-4">
+          <i class="bi bi-inbox fs-1"></i>
+          <div class="mt-2">暂无任何名片数据</div>
+        </td>
+      </tr>
+<!--      th:class="${card.isActive == 1} ? 'table-active'"-->
+      <tr th:if="${not #lists.isEmpty(cards)}" th:each="card,iter : ${cards}" >
+        <th scope="row" th:text="${iter.index+1}">1</th>
+        <td th:text="${card.cardName}">Mark</td>
+        <td th:text="${card.cardTitle}">Mark</td>
+        <td th:text="${card.position}">Mark</td>
+        <td th:text="${card.company}">Mark</td>
+        <td th:text="${card.user.phone}">Mark</td>
+        <td>
+          <span th:if="${card.isActive==1}">已激活</span>
+          <span th:if="${card.isActive==0}">未激活</span>
+        </td>
+        <td>
+          <div class="d-flex gap-2">
+            <!-- 编辑按钮 -->
+            <button type="button"
+                    class="btn btn-sm btn-outline-primary edit-btn"
+                    data-bs-toggle="modal"
+                    data-bs-target="#editModal"
+                    th:data-card-id="${card.id}"
+                    th:data-card-name="${card.cardName}"
+                    th:data-card-title="${card.cardTitle}"
+                    th:data-company="${card.company}"
+                    th:data-position="${card.position}"
+                    th:data-user-phone="${card.user.phone}"
+                    th:data-is-active="${card.isActive}">
+              <i class="bi bi-pencil"></i> 修改
+            </button>
+
+            <!-- 删除按钮 -->
+            <form th:action="@{/cards/delete/{id}(id=${card.id})}"
+                  method="POST"
+                  th:id="'deleteForm-' + ${iter.index+1}">
+              <input type="hidden" name="_method" value="DELETE">
+              <button type="button"
+                      class="btn btn-sm btn-outline-danger delete-btn"
+                      th:data-card-id="${iter.index+1}">
+                <i class="bi bi-trash"></i> 删除
+              </button>
+            </form>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+</div>
+
+  <th:block th:replace="~{fragments/edit :: edit-modal}"></th:block>
+  <th:block th:replace="~{fragments/create :: create-modal}"></th:block>
+</th:block>

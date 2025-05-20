@@ -1,0 +1,50 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="create-modal">
+  <div class="modal fade" id="createModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">新建名片</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <form id="createForm" method="post" th:action="@{/cards/create}">
+<!--          <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>-->
+
+          <div class="modal-body">
+            <div class="mb-3">
+              <label class="form-label">显示名称</label>
+              <input type="text" class="form-control" name="cardName" required>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">名片标题</label>
+              <input type="text" class="form-control" name="cardTitle" required>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">公司名称</label>
+              <input type="text" class="form-control" name="company" required>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">职位</label>
+              <input type="text" class="form-control" name="position" required>
+            </div>
+
+            <div class="mb-3 form-check">
+              <input type="checkbox" class="form-check-input" name="isActive">
+              <label class="form-check-label">设为激活状态</label>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">创建</button>
+            <a th:href="@{/home}" class="btn btn-secondary">返回到首页</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</th:block>

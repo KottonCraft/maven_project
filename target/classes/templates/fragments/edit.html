@@ -1,0 +1,63 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="edit-modal">
+    <div class="modal fade" id="editModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <!-- 模态框头部 -->
+                <div class="modal-header">
+                    <h5 class="modal-title">修改名片</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <form id="editForm" method="post">
+<!--                    <input type="hidden" name="_method" value="put">-->
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label class="form-label">显示姓名</label>
+                            <input type="text" class="form-control"
+                                   name="cardName"
+                                   required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">名片标题</label>
+                            <input type="text" class="form-control"
+                                   name="cardTitle">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">公司名称</label>
+                            <input type="text" class="form-control"
+                                   name="company">
+<!--                            <div th:if="${#fields.hasErrors('company')}"-->
+<!--                                 th:errors="*{company}" class="error"></div>-->
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">职位</label>
+                            <input type="text" class="form-control"
+                                   name="position"
+                                   required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">联系方式</label>
+                            <label class="form-control" name="userPhone">联系方式</label>
+                        </div>
+
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input"
+                                   name="isActive">
+                            <label class="form-check-label">设为激活状态</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">保存修改</button>
+                        <a th:href="@{/home}" class="btn btn-secondary">返回到首页</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</th:block>
